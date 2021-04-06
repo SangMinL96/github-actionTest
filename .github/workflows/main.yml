@@ -9,8 +9,8 @@ env:
   PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }} # GCP Project ID 
   GKE_CLUSTER: market-universe # GKE Cluseter ID
   GKE_ZONE: asia-east1-a # GKE Cluseter Zone
-  DEPLOYMENT_NAME: app-demo # GKE deloyment name 
-  IMAGE: gke-image-name # Container Image Name 
+  DEPLOYMENT_NAME: market-universe # GKE deloyment name 
+  IMAGE: market-universe # Container Image Name 
 
 jobs:
   setup-build-publish-deploy:
