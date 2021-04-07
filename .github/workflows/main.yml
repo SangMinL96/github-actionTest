@@ -32,6 +32,7 @@ jobs:
 
       - run: |-
           gcloud --quiet auth configure-docker
+          gcloud container clusters get-credentials market-universe
 
       # Get the GKE credentials so we can deploy to the cluster
       - uses: google-github-actions/get-gke-credentials@v0.2.1
