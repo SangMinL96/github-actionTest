@@ -17,7 +17,7 @@ const IndexPage = () => (
           }
         `}
       >
-        <p>ddddddddd</p>
+        <p>ddddddddddd</p>
       </div>
     </p>
   </Layout>
