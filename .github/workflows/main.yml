@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }} # GCP Project ID 
+  PROJECT_ID: gentle-habitat-309914 # GCP Project ID 
   GKE_CLUSTER: market-universe # GKE Cluseter ID
   GKE_ZONE: asia-east1-a # GKE Cluseter Zone
   DEPLOYMENT_NAME: market-server # GKE deloyment name 
