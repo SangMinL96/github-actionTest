@@ -39,6 +39,10 @@ jobs:
           location: ${{ env.GKE_ZONE }}
           credentials: ${{ secrets.GCP_SA_KEY }}
 
+      - run: |-
+          gcloud container clusters list
+          gcloud container clusters describe ${{ env.GKE_CLUSTER }}
+
       # Build the Docker image
       - name: Build
         run: |-
