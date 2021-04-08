@@ -31,7 +31,7 @@ jobs:
 
       - run: |-
           gcloud --quiet auth configure-docker
-          gcloud container clusters get-credentials market-universe --zone $GKE_ZONE --project $PROJECT_ID
+       
              
 
       # Get the GKE credentials so we can deploy to the cluster
