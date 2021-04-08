@@ -6,11 +6,11 @@ on:
       - main
 
 env:
-  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }} # GCP Project ID 
+  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }} # GCP Project ID
   GKE_CLUSTER: market-universe # GKE Cluseter ID
   GKE_ZONE: asia-east1-a # GKE Cluseter Zone
-  DEPLOYMENT_NAME: market-server # GKE deloyment name 
-  IMAGE: market-universe # Container Image Name 
+  DEPLOYMENT_NAME: market-server # GKE deloyment name
+  IMAGE: market-universe # Container Image Name
 
 jobs:
   setup-build-publish-deploy:
@@ -18,7 +18,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
       # Checkout Repository
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -32,9 +31,13 @@ jobs:
 
       - run: |-
           gcloud --quiet auth configure-docker
-          
 
-      
+      # Get the GKE credentials so we can deploy to the cluster
+      - uses: google-github-actions/get-gke-credentials@v0.2.1
+        with:
+          cluster_name: ${{ env.GKE_CLUSTER }}
+          location: ${{ env.GKE_ZONE }}
+          credentials: ${{ secrets.GCP_SA_KEY }}
 
       # Build the Docker image
       - name: Build
