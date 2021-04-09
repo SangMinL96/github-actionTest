@@ -46,9 +46,6 @@ jobs:
       # Build the Docker image
       - name: Build
         run: |-
-          docker-credential-gcr configure-docker
-          GOOGLE_APPLICATION_CREDENTIALS=/path/to/mygcrserviceaccount.JSON
-          docker login -u $KEY -p "$(cat ${GOOGLE_APPLICATION_CREDENTIALS})" https://gcr.io
           docker build \
             --tag "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA" \
             --build-arg GITHUB_SHA="$GITHUB_SHA" \
