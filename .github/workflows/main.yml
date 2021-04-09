@@ -11,7 +11,7 @@ env:
   GKE_ZONE: asia-east1-a # GKE Cluseter Zone
   DEPLOYMENT_NAME: market-server # GKE deloyment name
   IMAGE: market-universe # Container Image Name
-
+  KEY: ${{ secrets.GCP_SA_KEY }}
 jobs:
   setup-build-publish-deploy:
     name: SetUp Build Publish Deploy
@@ -46,6 +46,10 @@ jobs:
       # Build the Docker image
       - name: Build
         run: |-
+          rm -rf ~/.docker
+          docker-credential-gcr configure-docker
+          GOOGLE_APPLICATION_CREDENTIALS=/path/to/mygcrserviceaccount.JSON
+          docker login -u $KEY -p "$(cat ${GOOGLE_APPLICATION_CREDENTIALS})" https://gcr.io
           docker build \
             --tag "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA" \
             --build-arg GITHUB_SHA="$GITHUB_SHA" \
