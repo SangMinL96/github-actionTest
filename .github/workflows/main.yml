@@ -55,7 +55,7 @@ jobs:
       # Push the Docker image to Google Container Registry
       - name: Publish
         run: |-
-          docker push "gcr.io/$PROJECT_ID/$IMAGE:$IMAGE"
+          docker push "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA"
 
       # Set up  Kustomize
       - name: Set up Kustomize
