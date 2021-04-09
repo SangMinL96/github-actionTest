@@ -1,0 +1,41 @@
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "marget-universe"
+  namespace: "default"
+  labels:
+    app: "marget-universe"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: "marget-universe"
+  template:
+    metadata:
+      labels:
+        app: "marget-universe"
+    spec:
+      containers:
+      - name: "market-universe-sha256-1"
+        image: "gcr.io/gentle-habitat-309914/market-universe@sha256:edd45b83736c00bc638ebefef046068e1c40de3473853d0ada86dc5aeea16b27"
+---
+apiVersion: "autoscaling/v2beta1"
+kind: "HorizontalPodAutoscaler"
+metadata:
+  name: "marget-universe-hpa-rzs5"
+  namespace: "default"
+  labels:
+    app: "marget-universe"
+spec:
+  scaleTargetRef:
+    kind: "Deployment"
+    name: "marget-universe"
+    apiVersion: "apps/v1"
+  minReplicas: 1
+  maxReplicas: 5
+  metrics:
+  - type: "Resource"
+    resource:
+      name: "cpu"
+      targetAverageUtilization: 80
