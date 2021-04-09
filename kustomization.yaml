@@ -1,41 +1,51 @@
 ---
 apiVersion: "kustomize.config.k8s.io/v1beta1"
-kind: "kustomization"
+kind: "Deployment"
 metadata:
-  name: "marget-universe"
-  namespace: "default"
   labels:
-    app: "marget-universe"
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: "marget-universe"
-  template:
-    metadata:
-      labels:
-        app: "marget-universe"
-    spec:
-      containers:
-      - name: "market-universe-sha256-1"
-        image: "gcr.io/gentle-habitat-309914/market-universe@sha256:edd45b83736c00bc638ebefef046068e1c40de3473853d0ada86dc5aeea16b27"
----
-apiVersion: "autoscaling/v2beta1"
-kind: "Kustomization"
-metadata:
-  name: "marget-universe-hpa-rzs5"
-  namespace: "default"
-  labels:
-    app: "marget-universe"
-spec:
-  scaleTargetRef:
-    kind: "Kustomization"
-    name: "marget-universe"
-    apiVersion: "apps/v1"
-  minReplicas: 1
-  maxReplicas: 5
-  metrics:
-  - type: "Resource"
-    resource:
-      name: "cpu"
-      targetAverageUtilization: 80
+    app: marget-universe
+  managedFields:
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:labels':
+            .: {}
+            'f:app': {}
+        'f:spec':
+          'f:progressDeadlineSeconds': {}
+          'f:replicas': {}
+          'f:revisionHistoryLimit': {}
+          'f:selector':
+            'f:matchLabels':
+              .: {}
+              'f:app': {}
+          'f:strategy':
+            'f:rollingUpdate':
+              .: {}
+              'f:maxSurge': {}
+              'f:maxUnavailable': {}
+            'f:type': {}
+          'f:template':
+            'f:metadata':
+              'f:labels':
+                .: {}
+                'f:app': {}
+            'f:spec':
+              'f:containers':
+                'k:{"name":"client-sha256-1"}':
+                  .: {}
+                  'f:image': {}
+                  'f:imagePullPolicy': {}
+                  'f:name': {}
+                  'f:resources': {}
+                  'f:terminationMessagePath': {}
+                  'f:terminationMessagePolicy': {}
+              'f:dnsPolicy': {}
+              'f:restartPolicy': {}
+              'f:schedulerName': {}
+              'f:securityContext': {}
+              'f:terminationGracePeriodSeconds': {}
+      manager: GoogleCloudConsole
+      operation: Update
+      time: '2021-03-18T14:56:06Z'
